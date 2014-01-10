@@ -1,11 +1,11 @@
 from distutils.core import setup
 
 setup(
-    name='DirWalker',
-    version='0.1',
+    name='dirwalker',
+    version='0.1.1',
     author='Matthew Rankin',
     author_email='matthew.d.rankin@gmail.com',
-    url='https://github.com/matthewrankin'
+    url='https://github.com/matthewrankin',
     license='BSD',
     description='Directory Walker',
     long_description=open('README.txt').read(),

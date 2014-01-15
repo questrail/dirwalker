@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Copyright (c) 2014 The dirwalker developers. All rights reserved.
-# Project site: https://github.com/questrail/applyaf
+# Project site: https://github.com/matthewrankin/dirwalker
 # Use of this source code is governed by a MIT-style license that
 # can be found in the LICENSE.txt file for the project.
 """Walk a directory searching for certain file extensions.

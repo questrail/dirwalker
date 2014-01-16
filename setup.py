@@ -8,7 +8,7 @@ setup(
     py_modules=['dirwalker'],
     url='https://github.com/matthewrankin/dirwalker',
     license='LICENSE.txt',
-    description='Python Directory Walker',
+    description='Python Directory Walker module',
     long_description=open('README.md').read(),
     classifiers=[
         'Programming Language :: Python',

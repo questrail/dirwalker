@@ -19,6 +19,7 @@ from __future__ import absolute_import
 # Standard module imports
 import os
 
+
 def find_filenames_with_extensions(
         search_directory, extensions):
     """Find filenames with given extensions.

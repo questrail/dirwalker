@@ -18,5 +18,8 @@ setup(
         'Operating System :: OS Independent',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Libraries :: Python Modules',
+    ],
+    setup_requires=[
+        'flake8'
     ]
 )

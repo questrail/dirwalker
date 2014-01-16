@@ -26,7 +26,7 @@ def build(docs=False):
 
 @task
 def lint():
-    run("flake8 --max-complexity 12 dirwalker.py")
+    run("python setup.py flake8")
 
 
 @task

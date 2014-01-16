@@ -25,8 +25,8 @@ def build(docs=False):
 
 
 @task
-def deploy():
+def upload():
     """
-    Deploy to PyPI
+    Upload dirwalker to PyPI
     """
-    print("I should be deploying to PyPI right now")
+    run("python setup.py register sdist upload")

@@ -1,10 +1,12 @@
-Author
-------
-Matthew Rankin
+# Author #
 
-Maintainers
------------
+* Matthew Rankin
 
-Contributors
-------------
+# Maintainers #
+
+* None at this time.
+
+# Contributors #
+
+* None at this time.
 

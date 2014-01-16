@@ -9,10 +9,10 @@ searching for files with the given extensions.
 
 ## Contributing
 
-[applyaf] is developed using [git-flow], which are "git extensions to
+[dirwalker] is developed using [git-flow], which are "git extensions to
 provide high-level repository operations for [Vincent Driessen's
 branching model][nvie-git]." To contirbute, [install git-flow], fork
-[applyaf], and then run:
+[dirwalker], and then run:
 
 ```bash
 $ git clone git@github.com:<username>/dirwalker.git

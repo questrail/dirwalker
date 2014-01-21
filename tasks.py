@@ -53,7 +53,7 @@ def release(start=False, finish=False, deploy=False, version=''):
                 run("git push --tags")
                 run("git checkout master")
                 run("python setup.py register sdist upload")
-                run("git check develop")
+                run("git checkout develop")
         else:
             print("* Have you updated the version in dirwalker.py?")
             print("* Have you updated CHANGES.md?")

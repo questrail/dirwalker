@@ -37,7 +37,7 @@ def upload():
     run("python setup.py register sdist upload")
 
 
-@task('lint')
+@task()
 def release(start=False, finish=False, deploy=False, version=''):
     if start:
         if version:

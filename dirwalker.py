@@ -19,6 +19,10 @@ from __future__ import absolute_import
 # Standard module imports
 import os
 
+# The version as used in the setup.py
+__version__ = '0.1.2'
+
+
 def find_filenames_with_extensions(
         search_directory, extensions):
     """Find filenames with given extensions.

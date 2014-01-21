@@ -54,7 +54,7 @@ class TestFindingFiles(unittest.TestCase):
     def test_relative_path(self):
         self.assertEqual(
             dirwalker.find_filenames_with_extensions(
-                './test/sample_dir/',
+                './tests/sample_dir/',
                 ['.js']),
             [self.known_sample_file_06_js])
 

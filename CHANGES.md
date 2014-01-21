@@ -1,6 +1,6 @@
 # Version History #
 
-## Version: 0.2 (Unreleased) ##
+## Version: 0.1.2 (21-Jan-14) ##
 
 ### NEWS and CHANGES ###
 
@@ -14,7 +14,7 @@
 
 ### BUGS FIXED ###
 
-## Version: 0.1 (2010-11-16) ##
+## Version: 0.1 (16-Nov-10) ##
 
 ### NEWS and CHANGES ###
 

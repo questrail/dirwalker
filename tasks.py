@@ -1,5 +1,7 @@
 from invoke import run, task
 
+TESTPYPI = "https://testpypi.python.org/pypi"
+
 
 @task
 def lint():
@@ -9,20 +11,25 @@ def lint():
 @task(pre=['lint'])
 def test():
     run("nosetests")
+    run("python setup.py check")
 
 
 @task()
-def release(start=False, finish=False, deploy=False, version=''):
+def release(start=False, finish=False, deploy=False, test=False, version=''):
     """Release dirwalker and deploy to PyPI
     """
+    if test:
+        run("python setup.py check")
+        run("python setup.py register sdist upload --dry-run")
+
     if start:
         if version:
             run("git flow release start v{ver}".format(
                 ver=version))
     if finish:
+        run("python setup.py check")
         if deploy:
             if version:
-                run("python setup.py check")
                 run("python setup.py sdist")
                 run("git flow release finish v{ver}".format(
                     ver=version))

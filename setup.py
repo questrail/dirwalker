@@ -32,11 +32,17 @@ def find_version(*file_paths):
         return version_match.group(1)
     raise RuntimeError("Unable to find version string.")
 
+try:
+    import pypandoc
+    long_description = pypandoc.convert('README.me', 'rst')
+except:
+    long_description = open('README.md').read()
+
 setup(
     name='dirwalker',
     version=find_version('dirwalker.py'),
     description='Python Directory Walker module',
-    long_description=open('README.md').read(),
+    long_description=long_description,
     author='Matthew Rankin',
     author_email='matthew@questrail.com',
     py_modules=['dirwalker'],

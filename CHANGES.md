@@ -1,5 +1,11 @@
 # Version History #
 
+## Version: 0.1.6 (23-Jan-14) ##
+
+### NEWS and CHANGES ###
+
+* Fixed setup.py for README.md to rst
+
 ## Version: 0.1.5 (23-Jan-14) ##
 
 ### NEWS and CHANGES ###

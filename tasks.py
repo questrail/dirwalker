@@ -32,7 +32,7 @@ def release(start=False, finish=False, deploy=False, test=False, version=''):
             if version:
                 run("python setup.py sdist")
                 run("git flow release finish v{ver}".format(
-                    ver=version))
+                    ver=version), echo=True)
                 run("git push --tags")
                 run("git checkout master")
                 run("python setup.py register sdist upload")

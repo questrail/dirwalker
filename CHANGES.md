@@ -1,5 +1,11 @@
 # Version History #
 
+## Version: 0.1.5 (23-Jan-14) ##
+
+### NEWS and CHANGES ###
+
+* Fixed tasks.py for release
+
 ## Version: 0.1.4 (23-Jan-14) ##
 
 ### NEWS and CHANGES ###

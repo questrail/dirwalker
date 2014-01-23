@@ -37,6 +37,7 @@ def find_filenames_with_extensions(
         A list of filenames found.
     """
     files_found = []
+    search_directory = os.path.abspath(search_directory)
     for root, dirs, files in os.walk(search_directory):
         for filename in files:
             current_file = os.path.join(root, filename)

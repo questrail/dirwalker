@@ -2,43 +2,19 @@ from invoke import run, task
 
 
 @task
-def clean(docs=False, bytecode=False, extra=''):
-    patterns = ['build']
-    if docs:
-        patterns.append('docs/_build')
-    if bytecode:
-        patterns.append('**/*.pyc')
-    if extra:
-        patterns.append(extra)
-    for pattern in patterns:
-        run("rm -rf {files}".format(files=pattern))
-
-
-@task
-def build(docs=False):
-    """
-    Bump versions and prepare for PyPI
-    """
-    run("python setup.py build")
-    if docs:
-        run("sphinx-build docs docs/_build")
-
-
-@task
 def lint():
     run("python setup.py flake8")
 
 
-@task
-def upload():
-    """
-    Upload dirwalker to PyPI
-    """
-    run("python setup.py register sdist upload")
+@task(pre=['lint'])
+def test():
+    run("nosetests")
 
 
 @task()
 def release(start=False, finish=False, deploy=False, version=''):
+    """Release dirwalker and deploy to PyPI
+    """
     if start:
         if version:
             run("git flow release start v{ver}".format(
@@ -53,7 +29,7 @@ def release(start=False, finish=False, deploy=False, version=''):
                 run("git push --tags")
                 run("git checkout master")
                 run("python setup.py register sdist upload")
-                run("git check develop")
+                run("git checkout develop")
         else:
             print("* Have you updated the version in dirwalker.py?")
             print("* Have you updated CHANGES.md?")

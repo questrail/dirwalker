@@ -1,5 +1,11 @@
 # Version History #
 
+## Version: 0.1.4 (23-Jan-14) ##
+
+### NEWS and CHANGES ###
+
+* Changed setup.py to convert README.md to rst
+
 ## Version: 0.1.2 (21-Jan-14) ##
 
 ### NEWS and CHANGES ###

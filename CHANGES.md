@@ -1,5 +1,11 @@
 # Version History #
 
+## Version: 0.2.2 (23-Jan-14) ##
+
+### NEWS and CHANGES ###
+
+* Added unit test for multiple extensions
+
 ## Version: 0.2.1 (23-Jan-14) ##
 
 ### NEWS and CHANGES ###

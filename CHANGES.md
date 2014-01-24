@@ -1,10 +1,10 @@
 # Version History #
 
-## Version: 0.2 (23-Jan-14) ##
+## Version: 0.2.1 (23-Jan-14) ##
 
-### ENHANCEMENTS MADE ###
+### NEWS and CHANGES ###
 
-* Can now elect to not recurse search directory
+* Corrected v0.2 release
 
 ## Version: 0.1.6 (23-Jan-14) ##
 

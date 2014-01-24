@@ -35,7 +35,7 @@ def find_version(*file_paths):
 try:
     import pypandoc
     long_description = pypandoc.convert('README.md', 'rst')
-except:
+except(IOError, ImportError):
     long_description = open('README.md').read()
 
 setup(

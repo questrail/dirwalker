@@ -40,7 +40,6 @@ def find_filenames_with_extensions(
     """
     files_found = []
     search_directory = os.path.abspath(search_directory)
-    print(search_directory)
     if recurse:
         for root, dirs, files in os.walk(search_directory):
             for filename in files:

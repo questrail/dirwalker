@@ -31,7 +31,7 @@ def release(start=False, finish=False, deploy=False, test=False, version=''):
         if deploy:
             if version:
                 run("python setup.py sdist")
-                run("git flow release finish v{ver}".format(
+                run("git flow release finish -m '{ver}' v{ver}".format(
                     ver=version), echo=True)
                 run("git push --tags")
                 run("git checkout master")

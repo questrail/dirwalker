@@ -24,7 +24,7 @@ __version__ = '0.1.6'
 
 
 def find_filenames_with_extensions(
-        search_directory, extensions):
+        search_directory, extensions, recurse=True):
     """Find filenames with given extensions.
 
     Args:
@@ -32,16 +32,28 @@ def find_filenames_with_extensions(
             search.
         extensions: A list or tuple of strings containing the extensions to
             look for.
+        recurse: A boolean indicating whether or not to recurse any
+            subdirectories.
 
     Returns:
         A list of filenames found.
     """
     files_found = []
     search_directory = os.path.abspath(search_directory)
-    for root, dirs, files in os.walk(search_directory):
-        for filename in files:
-            current_file = os.path.join(root, filename)
+    print(search_directory)
+    if recurse:
+        for root, dirs, files in os.walk(search_directory):
+            for filename in files:
+                current_file = os.path.join(root, filename)
+                for extension in extensions:
+                    if filename.endswith(extension):
+                        files_found.append(current_file)
+    else:
+        for filename in os.listdir(search_directory):
             for extension in extensions:
                 if filename.endswith(extension):
+                    current_file = os.path.join(search_directory,
+                                                filename)
                     files_found.append(current_file)
+
     return files_found

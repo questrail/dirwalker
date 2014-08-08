@@ -1,6 +1,12 @@
 # CHANGELOG.md
 This file contains all notable changes to the [dirwalker][] project.
 
+## v0.4.1 - 2014-08-08
+
+### Bug Fixes
+- Fix links to GitHub repo
+
+
 ## v0.4 - 2014-08-08
 
 ### Bug Fixes

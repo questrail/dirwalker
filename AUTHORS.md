@@ -1,12 +1,15 @@
-# Author #
+# AUTHORS.md
 
-* Matthew Rankin
+This file lists the authors, maintainers, and contributors for the
+[dirwalker][] project.
 
-# Maintainers #
+## Authors
+- Matthew Rankin
 
-* None at this time.
+## Maintainers
+- None at this time.
 
-# Contributors #
+## Contributors
+- None at this time.
 
-* None at this time.
-
+[dirwalker]: https://github.com/questrail/dirwalker

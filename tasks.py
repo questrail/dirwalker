@@ -12,8 +12,8 @@ def lint():
 @task(lint)
 def test():
     """Lint, unit test, and check setup.py"""
-    run("nosetests")
     run("python setup.py check")
+    run("nosetests --with-coverage --cover-package=dirwalker")
 
 
 @task()

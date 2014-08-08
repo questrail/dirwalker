@@ -1,6 +1,12 @@
 # CHANGELOG.md
 This file contains all notable changes to the [dirwalker][] project.
 
+## v0.3.2 - 2014-08-08
+
+### Bug Fixes
+- Travis-CI fails for 2.7, 3.3, and 3.4. Skipping one unit test to try
+  and resolve.
+
 ## v0.3.1 - 2014-08-08
 
 ### Bug Fixes

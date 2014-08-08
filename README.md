@@ -7,6 +7,21 @@ searching for files with the given extensions.
 
 * Python standard `os` module
 
+## Usage
+
+```python
+import dirwalker
+# Search with recursing subdirectories
+dirwalker.find_filenames_with_extensions(
+    '/Users/me/dev/search_directory',
+    ['txt', '.csv'])
+# Search without recursing subdirectories
+dirwalker.find_filenames_with_extensions(
+    '/Users/me/dev/search_directory',
+    ['txt', '.csv'],
+    recurse=False)
+```
+
 ## Contributing
 
 [dirwalker] is developed using [git-flow], which are "git extensions to

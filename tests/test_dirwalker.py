@@ -96,6 +96,16 @@ class TestFindingFiles(unittest.TestCase):
                 ['.js']),
             [self.known_sample_file_06_js])
 
+    def test_find_multiple_extensions(self):
+        """Find more than one extension"""
+        self.assertEqual(
+            dirwalker.find_filenames_with_extensions(
+                self.sample_dir,
+                ['js', '.py']),
+            [self.known_sample_file_05_py,
+             self.known_sample_file_06_js,
+             self.known_sample_level_2_file_05_py])
+
     def test_relative_path(self):
         self.assertEqual(
             dirwalker.find_filenames_with_extensions(

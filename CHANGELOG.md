@@ -1,6 +1,12 @@
 # CHANGELOG.md
 This file contains all notable changes to the [dirwalker][] project.
 
+## v0.3.1 - 2014-08-08
+
+### Bug Fixes
+- Travis-CI failed. Updated requirements.txt and confirmed that tests
+  pass on local machine using Python 2.6.8, 2.7.8, and 3.4.1
+
 ## v0.3 - 2014-08-08
 
 ### Enhancements

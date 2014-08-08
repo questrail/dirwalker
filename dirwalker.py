@@ -36,9 +36,9 @@ def find_filenames_with_extensions(
             subdirectories.
 
     Returns:
-        A list of filenames found.
+        A set of filenames found.
     """
-    files_found = []
+    files_found = set()
     search_directory = os.path.abspath(search_directory)
     if recurse:
         for root, dirs, files in os.walk(search_directory):
@@ -46,13 +46,13 @@ def find_filenames_with_extensions(
                 current_file = os.path.join(root, filename)
                 for extension in extensions:
                     if filename.endswith(extension):
-                        files_found.append(current_file)
+                        files_found.add(current_file)
     else:
         for filename in os.listdir(search_directory):
             for extension in extensions:
                 if filename.endswith(extension):
                     current_file = os.path.join(search_directory,
                                                 filename)
-                    files_found.append(current_file)
+                    files_found.add(current_file)
 
     return files_found

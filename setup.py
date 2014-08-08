@@ -46,7 +46,7 @@ setup(
     author='Matthew Rankin',
     author_email='matthew@questrail.com',
     py_modules=['dirwalker'],
-    url='https://github.com/matthewrankin/dirwalker',
+    url='https://github.com/questrail/dirwalker',
     license='MIT',
     classifiers=[
         'Programming Language :: Python',

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2014 The dirwalker developers. All rights reserved.
-# Project site: https://github.com/matthewrankin/dirwalker
+# Project site: https://github.com/questrail/dirwalker
 # Use of this source code is governed by a MIT-style license that
 # can be found in the LICENSE.txt file for the project.
 """Unit tests for dirwalker.py.

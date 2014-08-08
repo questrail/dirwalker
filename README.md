@@ -51,9 +51,9 @@ a pull request.  [GitHub Flow][] is summarized as:
 [dirwalker] is released under the MIT license. Please see the
 [LICENSE.txt] file for more information.
 
-[coveralls image]:http://img.shields.io/coveralls/questrail/dirwalker/master.svg
+[coveralls image]: https://img.shields.io/coveralls/questrail/dirwalker.svg
 [coveralls link]: https://coveralls.io/r/questrail/dirwalker
-[dirwalker]: https://github.com/matthewrankin/dirwalker
+[dirwalker]: https://github.com/questrail/dirwalker
 [github flow]: http://scottchacon.com/2011/08/31/github-flow.html
 [LICENSE.txt]: https://github.com/questrail/dirwalker/blob/master/LICENSE.txt
 [license image]: http://img.shields.io/pypi/l/dirwalker.svg

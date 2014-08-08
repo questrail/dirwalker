@@ -1,6 +1,11 @@
 # CHANGELOG.md
 This file contains all notable changes to the [dirwalker][] project.
 
+## v0.4 - 2014-08-08
+
+### Bug Fixes
+- Return a set instead of an array
+
 ## v0.3.2 - 2014-08-08
 
 ### Bug Fixes

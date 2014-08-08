@@ -20,7 +20,7 @@ from __future__ import absolute_import
 import os
 
 # The version as used in the setup.py
-__version__ = '0.3.2'
+__version__ = '0.4'
 
 
 def find_filenames_with_extensions(

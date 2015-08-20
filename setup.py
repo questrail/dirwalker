@@ -57,7 +57,7 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'License :: OSI Approved :: MIT License',
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Operating System :: OS Independent',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Libraries :: Python Modules',

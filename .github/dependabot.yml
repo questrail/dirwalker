@@ -1,0 +1,36 @@
+version: 2
+
+updates:
+  # The actions in ci.yml and release.yml are pinned to commit SHAs, so a fix
+  # published upstream does not reach this repository on its own the way a
+  # moving tag would. Without this, pinning would amount to staying on one
+  # commit forever. Dependabot rewrites the SHA and the version comment
+  # beside it together.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      # Minor and patch updates arrive as one pull request rather than one
+      # per action. Majors are deliberately left out of the group, so that a
+      # change like a setup-uv major upgrade gets read before it is merged.
+      actions:
+        update-types: ["minor", "patch"]
+        patterns: ["*"]
+
+  # The dev tools are pinned in uv.lock, and nothing but memory moved them:
+  # `just up-all` is a manual act. Dependabot's uv ecosystem reads
+  # pyproject.toml and uv.lock together, so an update arrives as a lock file
+  # change that CI checks with `uv sync --locked` rather than as a resolution
+  # done on the runner.
+  - package-ecosystem: uv
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      # Everything in the lock file is a dev tool that only ever runs here,
+      # since the project itself declares no runtime dependencies, so the
+      # updates are read as one pull request rather than one per tool. A tool
+      # added later is covered without having to be named.
+      dev-tools:
+        patterns: ["*"]

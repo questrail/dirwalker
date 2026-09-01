@@ -1,66 +1,195 @@
 # dirwalker
 
-[![PyPi Version][pypi ver image]][pypi ver link]
-[![Build Status][travis image]][travis link]
+[![PyPI Version][pypi ver image]][pypi ver link]
+[![Python Versions][pyversions image]][pypi ver link]
+[![CI Status][ci image]][ci link]
 [![Coverage Status][coveralls image]][coveralls link]
 [![License Badge][license image]][LICENSE.txt]
 
-[dirwalker][] is a Python (2.6+/3.3+) package that walks multiple-level
-directories searching for files with the given extensions.
+[dirwalker][] is a Python 3.12+ module that walks multiple-level directories
+searching for files with the given extensions and returns the absolute path of
+each file it finds.
 
-## Requirements
+## Installation
 
-* Python standard `os` module
+You can install [dirwalker][] either via the Python Package Index (PyPI) or
+from source.
+
+To add it to a project managed with [uv][], which records it in your
+`pyproject.toml` and lock file:
+
+```bash
+$ uv add dirwalker
+```
+
+Or to install it with pip:
+
+```bash
+$ pip install dirwalker
+```
+
+**Source:** https://github.com/questrail/dirwalker
 
 ## Usage
 
 ```python
 import dirwalker
-# Search with recursing subdirectories
+
+# Search, recursing subdirectories
 dirwalker.find_filenames_with_extensions(
-    '/Users/me/dev/search_directory',
-    ['txt', '.csv'])
+    "/Users/me/dev/search_directory", ["txt", ".csv"]
+)
+
 # Search without recursing subdirectories
 dirwalker.find_filenames_with_extensions(
-    '/Users/me/dev/search_directory',
-    ['txt', '.csv'],
-    recurse=False)
+    "/Users/me/dev/search_directory", ["txt", ".csv"], recurse=False
+)
 ```
+
+A `set` of absolute paths is returned. Each extension is matched against the
+end of the filename, so it may be given with or without its leading period:
+both `csv` and `.csv` find `readings.csv`. Directories are searched, never
+returned, even when a directory's own name ends in one of the extensions.
+
+## Dependencies
+
+[dirwalker][] uses only the Python standard library. See the `pyproject.toml`
+and `uv.lock` files for the development dependencies.
 
 ## Contributing
 
-[dirwalker][] is developed using [Scott Chacon][]'s [GitHub Flow][]. To
-contribute, fork [dirwalker][], create a feature branch, and then submit
-a pull request.  [GitHub Flow][] is summarized as:
+Contributions are welcome! To contribute please:
 
-- Anything in the `master` branch is deployable
-- To work on something new, create a descriptively named branch off of
-  `master` (e.g., `new-oauth2-scopes`)
-- Commit to that branch locally and regularly push your work to the same
-  named branch on the server
-- When you need feedback or help, or you think the branch is ready for
-  merging, open a [pull request][].
-- After someone else has reviewed and signed off on the feature, you can
-  merge it into master.
-- Once it is merged and pushed to `master`, you can and *should* deploy
-  immediately.
+1. Fork the repository
+2. Create a feature branch
+3. Add code and tests
+4. Pass lint and tests
+5. Submit a [pull request][]
 
+## Development Setup
 
-# License
+### Development Setup Using uv
 
-[dirwalker] is released under the MIT license. Please see the
-[LICENSE.txt] file for more information.
+#### Development Setup on macOS
 
-[coveralls image]: https://img.shields.io/coveralls/questrail/dirwalker.svg
-[coveralls link]: https://coveralls.io/r/questrail/dirwalker
+```bash
+$ brew install uv just
+```
+
+With [uv][] and [Just][] installed, development has been simplified to simply
+running [Just][] to see the available commands.
+
+```bash
+$ just
+```
+
+[ruff][] and [pyright][] are deliberately absent from that line. Both are dev
+dependencies pinned in `uv.lock` and reached through `uv run`, so every recipe
+and every CI job uses the same version. A `brew install ruff` would put a
+second, unpinned copy on the path for an editor to find, and ruff releases
+change how code is formatted: the editor would then reformat code that
+`ruff format --check` rejects on the next run.
+
+#### Releasing to PyPI
+
+`just release` cuts the release. It first checks that a release is possible at
+all, then lints, type checks, and tests, then shows the entries waiting under
+Unreleased and the version each kind of bump would produce, and asks which to
+cut. Once answered it bumps the version, closes out the CHANGELOG, updates the
+lock file, commits, and tags. Pushing the tag is what publishes.
+
+```bash
+$ just release
+
+Releasing from 0.5.0, with these entries under Unreleased:
+
+    ### Fixed
+
+    - A directory whose own name ended in one of the extensions was
+      returned by a non-recursive search.
+
+    1) patch   0.5.0 -> 0.5.1
+    2) minor   0.5.0 -> 0.6.0
+    3) major   0.5.0 -> 1.0.0
+    q) cancel
+
+Which release? [1] 3
+
+Tagged v1.0.0. Publish it with:
+
+    git push --follow-tags
+```
+
+The entries decide the bump, so the prompt puts them next to the versions they
+would produce rather than leaving the choice to memory. Answering `q`, or
+anything unrecognized, changes nothing.
+
+The tag push runs the [release workflow][], which waits on the whole [CI
+workflow][ci link] before it does anything else: the 3.12, 3.13, and 3.14
+matrix and the workflow audit. `git push --follow-tags` starts both at once, so
+without that wait an upload could go out while 3.14 was still running, or
+already red. It then checks that the tagged commit is on `master`, since a tag
+is only a pointer and one placed anywhere else would otherwise publish whatever
+it points at, rechecks the tag against the version in `pyproject.toml`, and
+builds.
+
+Every check to that point runs against the source tree, so the workflow then
+installs the wheel it just built somewhere `src/` is not on the path and imports
+it there, which is the only step that can catch a packaging mistake that left
+something out of the distribution. It uploads once that passes. There is no PyPI
+API token anywhere: the workflow authenticates with [trusted publishing][], which
+mints a short lived credential from the GitHub OIDC identity of that run. That
+same identity signs a [PEP 740][] attestation for each distribution, which PyPI
+serves beside the file it attests: trusted publishing establishes who uploaded,
+and the attestation establishes what was uploaded and which workflow built it.
+The upload skips anything PyPI already holds, so a run that uploaded one
+distribution and then failed on the other can be retried instead of stranding a
+version number that PyPI will never allow to be reused.
+
+Uploading is followed by a [GitHub release][releases] for the tag, carrying the
+CHANGELOG section for that version as its notes and the built distributions as
+its assets. The notes are collected before the upload rather than after, so that
+a CHANGELOG with no section for the version being released stops the release
+while stopping it is still possible.
+
+Pushing the tag is the point of no return, since PyPI never lets a version
+number be reused. Everything `just release` does is local and amendable until
+then, and it refuses to start against a dirty working tree, off `master`, on a
+`master` behind its upstream, with a CHANGELOG whose Unreleased section is
+empty, or when the tag it would create already exists. Those refusals come
+before the lint and test run, so a release that cannot happen is turned away at
+once rather than after the suite. A refusal leaves the version and the CHANGELOG
+untouched.
+
+`just build` runs the same checks and produces the same distributions without
+releasing anything, which is the way to inspect what CI would upload.
+
+This depends on one piece of configuration that lives outside the repository. A
+[trusted publisher][trusted publishing] has to be registered for `dirwalker` on
+PyPI, pointing at the `questrail/dirwalker` repository, the `release.yml`
+workflow, and the `pypi` environment. It is a one time setup per project.
+
+## License
+
+[dirwalker][] is released under the MIT license. Please see the
+[LICENSE.txt][] file for more information.
+
+[ci image]: https://github.com/questrail/dirwalker/actions/workflows/ci.yml/badge.svg?branch=master
+[ci link]: https://github.com/questrail/dirwalker/actions/workflows/ci.yml
+[coveralls image]: https://coveralls.io/repos/github/questrail/dirwalker/badge.svg?branch=master
+[coveralls link]: https://coveralls.io/github/questrail/dirwalker?branch=master
 [dirwalker]: https://github.com/questrail/dirwalker
-[github flow]: http://scottchacon.com/2011/08/31/github-flow.html
+[just]: https://just.systems/
 [LICENSE.txt]: https://github.com/questrail/dirwalker/blob/master/LICENSE.txt
-[license image]: http://img.shields.io/pypi/l/dirwalker.svg
+[license image]: https://img.shields.io/pypi/l/dirwalker.svg
 [pull request]: https://help.github.com/articles/using-pull-requests
-[pypi ver image]: http://img.shields.io/pypi/v/dirwalker.svg
-[pypi ver link]: https://pypi.python.org/pypi/dirwalker/
-[scott chacon]: http://scottchacon.com/about.html
-[sdf guide]: http://cp.literature.agilent.com/litweb/pdf/5963-1715.pdf
-[travis image]: http://img.shields.io/travis/questrail/dirwalker/master.svg
-[travis link]: https://travis-ci.org/questrail/dirwalker
+[pypi ver image]: https://img.shields.io/pypi/v/dirwalker.svg
+[pypi ver link]: https://pypi.python.org/pypi/dirwalker
+[PEP 740]: https://peps.python.org/pep-0740/
+[pyright]: https://microsoft.github.io/pyright/
+[pyversions image]: https://img.shields.io/pypi/pyversions/dirwalker.svg
+[release workflow]: https://github.com/questrail/dirwalker/blob/master/.github/workflows/release.yml
+[releases]: https://github.com/questrail/dirwalker/releases
+[ruff]: https://docs.astral.sh/ruff/
+[trusted publishing]: https://docs.pypi.org/trusted-publishers/
+[uv]: https://docs.astral.sh/uv/

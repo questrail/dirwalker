@@ -4,6 +4,8 @@ This file contains all notable changes to the [dirwalker][] project.
 
 ## Unreleased
 
+## v1.0.0 - 2026-09-01
+
 ### Added
 
 - Build with [hatchling][] from a `pyproject.toml`, laid out under `src/`.

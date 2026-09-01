@@ -2,7 +2,7 @@
 
 [project]
 name = "dirwalker"
-version = "0.5.0"
+version = "1.0.0"
 description = "Walk a directory searching for files with the given extensions"
 readme = "README.md"
 license = "MIT"

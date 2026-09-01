@@ -101,21 +101,21 @@ lock file, commits, and tags. Pushing the tag is what publishes.
 ```bash
 $ just release
 
-Releasing from 0.5.0, with these entries under Unreleased:
+Releasing from 1.0.0, with these entries under Unreleased:
 
     ### Fixed
 
-    - A directory whose own name ended in one of the extensions was
-      returned by a non-recursive search.
+    - A trailing separator on the search directory was carried into the
+      returned paths.
 
-    1) patch   0.5.0 -> 0.5.1
-    2) minor   0.5.0 -> 0.6.0
-    3) major   0.5.0 -> 1.0.0
+    1) patch   1.0.0 -> 1.0.1
+    2) minor   1.0.0 -> 1.1.0
+    3) major   1.0.0 -> 2.0.0
     q) cancel
 
-Which release? [1] 3
+Which release? [1] 1
 
-Tagged v1.0.0. Publish it with:
+Tagged v1.0.1. Publish it with:
 
     git push --follow-tags
 ```

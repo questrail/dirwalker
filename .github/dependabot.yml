@@ -28,9 +28,12 @@ updates:
     schedule:
       interval: monthly
     groups:
-      # Everything in the lock file is a dev tool that only ever runs here,
-      # since the project itself declares no runtime dependencies, so the
-      # updates are read as one pull request rather than one per tool. A tool
-      # added later is covered without having to be named.
+      # dirwalker has no runtime dependencies, so everything in the lock is a
+      # dev tool and one grouped pull request covers all of it. The patterns
+      # are listed rather than matched with "*", which would silently sweep a
+      # runtime dependency added later into the dev tools group; the uv
+      # ecosystem is newer than matching on dependency type, so a dev tool
+      # added without a pattern here still gets updated, just in a pull
+      # request of its own.
       dev-tools:
-        patterns: ["*"]
+        patterns: ["pyright", "pytest", "pytest-*", "ruff", "zizmor"]
